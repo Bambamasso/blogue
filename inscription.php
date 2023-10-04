@@ -18,16 +18,17 @@
 
    $connexion = mysqli_connect ('localhost', 'root','', 'blogue' );
    if(!$connexion){
-   die('Erreur de connexion à la Base de Donnée');
+//    die('Erreur de connexion à la Base de Donnée');
    }
 
   //insertion des données dans la base de donnée
 
 
-  $result = "INSERT INTO user(firstname,lastname,email,image,sex,password)";
-    $result .= "VALUES ('$firstname','$lastname','$email','$img_url','$sex','$password')";
+    $result = "INSERT INTO users(firstname,lastname,image,sexe,email,password)";
+    $result .= "VALUES('$firstname','$lastname','$img_url','$sex','$email','$password')";
 
     $query = mysqli_query($connexion,$result);
+
     if($query){
         echo "insertion valide ! ";
     }
@@ -208,7 +209,7 @@
     <header>
         <a class="logo" href="">myBlog</a>
         <ul>
-            <li><a href="/myBlog">Accueil</a></li>
+            <li><a href="./index.php">Accueil</a></li>
             <li><a href="">Catégories</a></li>
             <li><a href="connexion.php">Connexion</a></li>
             <form action="" method="post">
@@ -244,11 +245,11 @@
                 </div>
                 <div class="group">
                     <label for="password">Mot de passe</label>
-                    <input type="text" name="password" id="password" placeholder="mot de passe">
+                    <input type="password" name="password" id="password" placeholder="mot de passe">
                 </div>
                 <div class="group">
                     <label for="cpassword">Confirmer le mot de passe</label>
-                    <input type="text" name="cpassword" id="cpassword" placeholder="confirmation du mot de passe">
+                    <input type="password" name="cpassword" id="cpassword" placeholder="confirmation du mot de passe">
                 </div>
                 <input type="submit" value="S'inscrire" name="" >
             </form>

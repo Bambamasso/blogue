@@ -170,7 +170,7 @@
     <header>
         <a class="logo" href="">myBlog</a>
         <ul>
-            <li><a href="/myBlog">Accueil</a></li>
+            <li><a href="./index.php">Accueil</a></li>
             <li><a href="">Catégories</a></li>
             <li><a href="connexion.php">Connexion</a></li>
             <form action="" method="post">

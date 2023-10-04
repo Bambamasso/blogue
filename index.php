@@ -1,3 +1,23 @@
+ <?php
+ // connexion à la basse de données
+ $connexion = mysqli_connect ('localhost', 'root','', 'blogue' );
+ if(!$connexion){
+       die('Erreur de connexion à la Base de Donnée');
+       }
+ //selection des articles dans notre base de donnée
+ $requete ="SELECT * FROM Article";
+ $query =mysqli_query($connexion,$requete);
+ if(!$query){
+    echo "OOps! Une erreur est survenue, veuillez réessayer plus tard!";
+} else{
+    $article = mysqli_fetch_all($query, MYSQLI_ASSOC);
+    // var_dump($article);
+
+
+}
+
+ ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -190,7 +210,7 @@
     <header>
         <a class="logo" href="">myBlog</a>
         <ul>
-            <li><a href="./myBlog">Accueil</a></li>
+            <li><a href="./index.php">Accueil</a></li>
             <li><a href="">Catégories</a></li>
             <li><a href="connexion.php">Connexion</a></li>
             <form action="" method="post">
@@ -203,50 +223,21 @@
         <div id="content">
             <h3>Articles postés</h3>
             <div id="posted">
+                
+               <?php
+                    foreach($article as $articles):
+                ?>
                 <div class="article">
-                    <img src="https://media.istockphoto.com/id/1319623001/photo/caesar-salad-with-crispy-bread-and-bacon-healthy-food-style.webp?s=1024x1024&w=is&k=20&c=gvTJfggHVKAWWCTdcEHIziVAfQmZJfgibmokDtLdiCc="
+                    <img src="<?php echo $articles["image"];?>"
                         alt="">
-                    <a class="title" href="voir.php">Mon Article 1</a>
+                    <a class="title" href="voir.php?id=<?php echo $articles["id"]?>" ><?php echo $articles["title"];?></a>
                     <div class="description">
-                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Maiores, libero? Ipsa magnam, eaque
-                            consectetur fuga esse accusamus voluptatem, laudantium quidem nulla nihil maiores iure
-                            veniam, amet ratione facere expedita. Perspiciatis.</p>
-                        <p class="date">Mardi 10 Octobre 2023</p>
+                        <p><?php echo $articles["description"];?></p>
+                        <p class="date"><?php echo $articles["date"];?></p>
                     </div>
                 </div>
-                <div class="article">
-                    <img src="https://media.istockphoto.com/id/1319623001/photo/caesar-salad-with-crispy-bread-and-bacon-healthy-food-style.webp?s=1024x1024&w=is&k=20&c=gvTJfggHVKAWWCTdcEHIziVAfQmZJfgibmokDtLdiCc="
-                        alt="">
-                    <a class="title" href="voir.php">Mon Article 1</a>
-                    <div class="description">
-                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Maiores, libero? Ipsa magnam, eaque
-                            consectetur fuga esse accusamus voluptatem, laudantium quidem nulla nihil maiores iure
-                            veniam, amet ratione facere expedita. Perspiciatis.</p>
-                        <p class="date">Mardi 10 Octobre 2023</p>
-                    </div>
-                </div>
-                <div class="article">
-                    <img src="https://media.istockphoto.com/id/1319623001/photo/caesar-salad-with-crispy-bread-and-bacon-healthy-food-style.webp?s=1024x1024&w=is&k=20&c=gvTJfggHVKAWWCTdcEHIziVAfQmZJfgibmokDtLdiCc="
-                        alt="">
-                    <a class="title" href="voir.php">Mon Article 1</a>
-                    <div class="description">
-                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Maiores, libero? Ipsa magnam, eaque
-                            consectetur fuga esse accusamus voluptatem, laudantium quidem nulla nihil maiores iure
-                            veniam, amet ratione facere expedita. Perspiciatis.</p>
-                        <p class="date">Mardi 10 Octobre 2023</p>
-                    </div>
-                </div>
-                <div class="article">
-                    <img src="https://media.istockphoto.com/id/1319623001/photo/caesar-salad-with-crispy-bread-and-bacon-healthy-food-style.webp?s=1024x1024&w=is&k=20&c=gvTJfggHVKAWWCTdcEHIziVAfQmZJfgibmokDtLdiCc="
-                        alt="">
-                    <a class="title" href="voir.php">Mon Article 1</a>
-                    <div class="description">
-                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Maiores, libero? Ipsa magnam, eaque
-                            consectetur fuga esse accusamus voluptatem, laudantium quidem nulla nihil maiores iure
-                            veniam, amet ratione facere expedita. Perspiciatis.</p>
-                        <p class="date">Mardi 10 Octobre 2023</p>
-                    </div>
-                </div>
+                <?php endforeach;?>
+                
             </div>
         </div>
     </main>
