@@ -23,6 +23,7 @@
 
   //insertion des données dans la base de donnée
 
+  
 
     $result = "INSERT INTO users(firstname,lastname,image,sexe,email,password)";
     $result .= "VALUES('$firstname','$lastname','$img_url','$sex','$email','$password')";
@@ -33,6 +34,9 @@
         echo "insertion valide ! ";
     }
 
+    // if(strlen($password <=5)){
+    //  $messsage="votre mot de passe est trop court";
+    //  }
   }
 
 ?>
@@ -245,7 +249,13 @@
                 </div>
                 <div class="group">
                     <label for="password">Mot de passe</label>
-                    <input type="password" name="password" id="password" placeholder="mot de passe">
+                    <input type="password" name="password" id="password" placeholder="mot de passe"  >
+                    <?php
+                     if(!isset($messsage)){
+                        echo $messsage;
+                     }
+                    ?>
+                  
                 </div>
                 <div class="group">
                     <label for="cpassword">Confirmer le mot de passe</label>

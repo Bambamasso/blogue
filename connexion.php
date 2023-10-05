@@ -1,3 +1,29 @@
+<?php
+$connexion = mysqli_connect('localhost', 'root','', 'blogue' );
+   if(!$connexion){
+    die('Erreur de connexion à la Base de Donnée');
+   }
+
+   if(!empty($_POST['email']) &&!empty($_POST['password']) ){
+
+ $email = $_POST['email'];
+  $password = $_POST['password'];
+ 
+  $selection ="SELECT * FROM users WHERE email='$email' && password='$password' ";
+
+  $result = mysqli_query($connexion,$selection);
+
+    if(!$result){
+        echo"oups une erreur c'est produit";
+    }
+    else{
+        echo"ok";
+    }
+   $recupe = mysqli_fetch_assoc($result);
+   var_dump($recupe);
+   }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -182,14 +208,14 @@
     <main>
         <div id="content">
             <h3>Connexion</h3>
-            <form action="./connecter/index.php" method="">
+            <form action="connexion.php" method="post">
                 <div class="group">
                     <label for="email">Email</label>
-                    <input type="text" name="" id="email" placeholder="johnDoe@ex.ci">
+                    <input type="text" name="email" id="email" placeholder="johnDoe@ex.ci">
                 </div>
                 <div class="group">
                     <label for="password">Mot de passe</label>
-                    <input type="text" name="" id="password" placeholder="mot de passe">
+                    <input type="text" name="password" id="password" placeholder="mot de passe">
                 </div>
                 <input type="submit" value="Se connecter">
             </form>

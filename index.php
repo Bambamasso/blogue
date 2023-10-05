@@ -12,6 +12,7 @@
 } else{
     $article = mysqli_fetch_all($query, MYSQLI_ASSOC);
     // var_dump($article);
+  
 
 
 }
@@ -230,10 +231,12 @@
                 <div class="article">
                     <img src="<?php echo $articles["image"];?>"
                         alt="">
-                    <a class="title" href="voir.php?id=<?php echo $articles["id"]?>" ><?php echo $articles["title"];?></a>
+                    <a class="title" href="voir.php?id=<?php echo $articles["id"]?>"><?php echo $articles["title"];?></a>
                     <div class="description">
                         <p><?php echo $articles["description"];?></p>
-                        <p class="date"><?php echo $articles["date"];?></p>
+                        <p class="date"><?php echo  $articles["date"];
+                        
+                        ?></p>
                     </div>
                 </div>
                 <?php endforeach;?>

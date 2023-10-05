@@ -17,7 +17,7 @@
         echo "OOps! Une erreur est survenue, veuillez réessayer plus tard!";
     } else{
         $article = mysqli_fetch_assoc($query);
-        // var_dump($article);
+        var_dump($article);
         $userid=$article['user_id'];
         $selecuser = "SELECT * FROM users WHERE id ='$userid' ";
         $query2 = mysqli_query($connexion, $selecuser);
