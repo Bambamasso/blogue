@@ -233,7 +233,7 @@
                 </div>
                 <div class="details">
                     <p class="name"><?php echo $user['firstname'].' '. $user['lastname']; ?></p>
-                    <p class="date"><?php echo $article['date']; ?></p>
+                    <p class="date"><?php echo date( 'l d F Y', strtotime($articles["date"])); ?></p>
                 </div>
             </div>
         </div>

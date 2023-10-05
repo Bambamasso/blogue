@@ -234,7 +234,7 @@
                     <a class="title" href="voir.php?id=<?php echo $articles["id"]?>"><?php echo $articles["title"];?></a>
                     <div class="description">
                         <p><?php echo $articles["description"];?></p>
-                        <p class="date"><?php echo  $articles["date"];
+                        <p class="date"><?php echo date( 'L d F Y', strtotime($articles["date"]));
                         
                         ?></p>
                     </div>

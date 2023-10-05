@@ -13,7 +13,9 @@ $selection="SELECT * FROM users WHERE id='$sessionUserId' ";
 
  $recuperation=mysqli_fetch_assoc($query);
  if($recuperation){
-    var_dump($recuperation);
+    unset($_SESSION['user_id']);
+    header ('LOCATION:../connexion.php');
+    // var_dump($recuperation);
  }else{
     die("utilisateur inconnu");
  }
@@ -22,14 +24,3 @@ $selection="SELECT * FROM users WHERE id='$sessionUserId' ";
 }
 
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Supprimer</title>
-</head>
-<body>
-    <h1>L'ARTICLE A ÉTÉ SUPPRIMÉ!</h1>
-</body>
-</html>

@@ -1,17 +1,23 @@
 <?php
-$connexion = mysqli_connect('localhost', 'root','', 'blogue' );
-   if(!$connexion){
-    die('Erreur de connexion à la Base de Donnée');
-   }
+ session_start();
 
+//verification des champs
    if(!empty($_POST['email']) &&!empty($_POST['password']) ){
 
- $email = $_POST['email'];
+  $email = $_POST['email'];
   $password = $_POST['password'];
- 
-  $selection ="SELECT * FROM users WHERE email='$email' && password='$password' ";
 
-  $result = mysqli_query($connexion,$selection);
+  //connexion à la base de données
+
+  $connexion = mysqli_connect('localhost', 'root','', 'blogue' );
+  if(!$connexion){
+   die('Erreur de connexion à la Base de Donnée');
+  }
+
+  //selection de la table dans la bbase de donnée
+   $selection ="SELECT * FROM users WHERE email='$email' && password='$password' ";
+
+   $result = mysqli_query($connexion,$selection);
 
     if(!$result){
         echo"oups une erreur c'est produit";
@@ -20,7 +26,18 @@ $connexion = mysqli_connect('localhost', 'root','', 'blogue' );
         echo"ok";
     }
    $recupe = mysqli_fetch_assoc($result);
-   var_dump($recupe);
+
+   //verification 
+    if($recupe){
+     $_SESSION['user_id']=$recupe['id'];
+     echo "validé";
+
+     header('LOCATION:./connecter/dashboard/dashboard.php');
+
+    }else{
+     echo "l'utilisateur n'existe pas";
+    }
+    // var_dump($recupe);
    }
 ?>
 
@@ -215,7 +232,7 @@ $connexion = mysqli_connect('localhost', 'root','', 'blogue' );
                 </div>
                 <div class="group">
                     <label for="password">Mot de passe</label>
-                    <input type="text" name="password" id="password" placeholder="mot de passe">
+                    <input type="password" name="password" id="password" placeholder="mot de passe">
                 </div>
                 <input type="submit" value="Se connecter">
             </form>
