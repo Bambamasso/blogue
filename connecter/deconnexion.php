@@ -4,7 +4,7 @@ $connexion = mysqli_connect ('localhost', 'root','', 'blogue' );
 if(!$connexion){
     die('Erreur de connexion à la Base de Donnée');
      }
-echo $_SESSION['user_id'];
+// echo $_SESSION['user_id'];
 if(!empty($_SESSION['user_id'])){
 $sessionUserId = $_SESSION['user_id'];
 $selection="SELECT * FROM users WHERE id='$sessionUserId' ";

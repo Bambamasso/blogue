@@ -4,7 +4,7 @@ $connexion = mysqli_connect ('localhost', 'root','', 'blogue' );
 if(!$connexion){
     die('Erreur de connexion à la Base de Donnée');
      }
-echo $_SESSION['user_id'];
+// echo $_SESSION['user_id'];
 if(!empty($_SESSION['user_id'])){
 $sessionUserId = $_SESSION['user_id'];
 $selection="SELECT * FROM users WHERE id='$sessionUserId' ";
@@ -13,7 +13,7 @@ $selection="SELECT * FROM users WHERE id='$sessionUserId' ";
 
  $recuperation=mysqli_fetch_assoc($query);
  if($recuperation){
-    var_dump($recuperation);
+    // var_dump($recuperation);
  }else{
     die("utilisateur inconnu");
  }
@@ -216,19 +216,19 @@ $selection="SELECT * FROM users WHERE id='$sessionUserId' ";
             <div id="info">
                 <h4>Mes informations</h4>
                 <div>
-                    <img src="https://images.unsplash.com/photo-1695920860936-82dd5d0daa59?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyNHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=900&q=60" alt="">
+                    <img src="<?php echo $recuperation['image']?>" alt="">
                 </div>
                 <div>
                     <p>Nom</p>
-                    <p>John</p>
+                    <p><?php echo $recuperation['firstname']?></p>
                 </div>
                 <div>
                     <p>Prenoms</p>
-                    <p>John</p>
+                    <p><?php echo $recuperation['lastname']?></p>
                 </div>
                 <div>
                     <p>Email</p>
-                    <p>John</p>
+                    <p><?php echo $recuperation['email']?></p>
                 </div>
             </div>
             <form action="">

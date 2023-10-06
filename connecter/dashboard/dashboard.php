@@ -4,7 +4,7 @@ $connexion = mysqli_connect ('localhost', 'root','', 'blogue' );
 if(!$connexion){
     die('Erreur de connexion à la Base de Donnée');
      }
-echo $_SESSION['user_id'];
+// echo $_SESSION['user_id'];
 if(!empty($_SESSION['user_id'])){
 $sessionUserId = $_SESSION['user_id'];
 $selection="SELECT * FROM users WHERE id='$sessionUserId' ";
@@ -12,8 +12,10 @@ $selection="SELECT * FROM users WHERE id='$sessionUserId' ";
  $query=mysqli_query ($connexion,$selection);
 
  $recuperation=mysqli_fetch_assoc($query);
+
+
  if($recuperation){
-    var_dump($recuperation);
+    // var_dump($recuperation);
  }else{
     die("utilisateur inconnu");
  }
@@ -142,7 +144,7 @@ $selection="SELECT * FROM users WHERE id='$sessionUserId' ";
     </header>
     <main>
         <div id="content">
-            <h1>Connecté en tant que : BROU FABIEN</h1>
+            <h1>Connecté en tant que :<?php echo $recuperation['firstname']?></h1>
         </div>
     </main>
 </body>

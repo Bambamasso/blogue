@@ -16,7 +16,7 @@
 
  //connexion à la base de donnée
 
-   $connexion = mysqli_connect ('localhost', 'root','', 'blogue' );
+   $connexion = mysqli_connect('localhost', 'root','', 'blogue' );
    if(!$connexion){
 //    die('Erreur de connexion à la Base de Donnée');
    }
@@ -24,9 +24,10 @@
   //insertion des données dans la base de donnée
 
 
-    if (strlen($password)<=5){
-         $messsage="mot de passe trop court";
-    }
+    // if (strlen($password)<=5){
+    //      $messsage="mot de passe trop court";
+    //      return $messsage;
+    // }
 
     $result = "INSERT INTO users(firstname,lastname,image,sexe,email,password)";
     $result .= "VALUES('$firstname','$lastname','$img_url','$sex','$email','$password')";
@@ -36,6 +37,7 @@
     if($query){
         echo "insertion valide ! ";
     }
+    header('LOCATION:./connexion.php');
    
 
     // if(strlen($password <=5)){

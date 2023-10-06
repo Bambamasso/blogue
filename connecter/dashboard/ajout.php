@@ -4,16 +4,31 @@ $connexion = mysqli_connect ('localhost', 'root','', 'blogue' );
 if(!$connexion){
     die('Erreur de connexion à la Base de Donnée');
      }
-echo $_SESSION['user_id'];
+// echo $_SESSION['user_id'];
 if(!empty($_SESSION['user_id'])){
 $sessionUserId = $_SESSION['user_id'];
-$selection="SELECT * FROM users WHERE id='$sessionUserId' ";
+$selection="SELECT * FROM users WHERE id='$sessionUserId'";
 
  $query=mysqli_query ($connexion,$selection);
 
  $recuperation=mysqli_fetch_assoc($query);
  if($recuperation){
-    var_dump($recuperation);
+    // var_dump($recuperation);
+
+     if(!empty($_POST['title']) && !empty($_POST['img_url']) && !empty($_POST['decription']) && !empty($_POST['categorie']) && !empty($_POST['content'])){
+
+     $title=$_POST['title'];
+     $img_url=$_POST['img_url'];
+     $decription=$_POST['decription'];
+     $categorie=$_POST['categorie'];
+     $content=$_POST['content'];
+    
+     $insertion="INSERT INTO Article (title,image,description,categorie,content,user_id)";
+     $insertion .= "VALUES('$title', '$img_url', '$decription', '$categorie', '$content', '') " ;
+
+     }
+    
+
  }else{
     die("utilisateur inconnu");
  }
@@ -234,15 +249,15 @@ $selection="SELECT * FROM users WHERE id='$sessionUserId' ";
             <form action="">
                 <div class="group">
                     <label for="title">Titre de l'article</label>
-                    <input type="text" name="" id="title" placeholder="">
+                    <input type="text" name="title" id="title" placeholder="">
                 </div>
                 <div class="group">
                     <label for="img_url">Image(lien url) de l'article</label>
-                    <input type="text" name="" id="img_url" placeholder="">
+                    <input type="text" name="img_url" id="img_url" placeholder="">
                 </div>
                 <div class="group">
                     <label for="decription">Description de l'article</label>
-                    <input type="text" name="" id="decription" placeholder="">
+                    <input type="text" name="decription" id="decription" placeholder="">
                 </div>
                 <div class="group">
                     <label for="category">Categorie de l'article</label>
