@@ -23,14 +23,15 @@ $selection="SELECT * FROM users WHERE id='$sessionUserId'";
      $categorie=$_POST['categorie'];
      $content=$_POST['content'];
     
-     $insertion ="INSERT INTO Article (title,image,description,categorie,content,user_id)";
+     $insertion ="INSERT INTO Article(title,image,description,categorie,content,user_id)";
      $insertion .= "VALUES('$title', '$img_url', '$description', '$categorie', '$content', '$sessionUserId') " ;
-
+     
       $requette=mysqli_query($connexion,$insertion);
 
      if($requette){
-    echo"insertion validé";
-     }else{echo"echec";}
+     echo"insertion validé";
+     }
+    //  else{echo"echec";}
 
      }
     

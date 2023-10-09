@@ -13,8 +13,6 @@
     $article = mysqli_fetch_all($query, MYSQLI_ASSOC);
     // var_dump($article);
   
-
-
 }
 
  ?>
@@ -229,7 +227,7 @@
                     foreach($article as $articles):
                 ?>
                 <div class="article">
-                    <img src="<?php echo $articles["image"];?>"
+                    <img src="<?php echo articles["image"];?>"
                         alt="">
                     <a class="title" href="voir.php?id=<?php echo $articles["id"]?>"><?php echo $articles["title"];?></a>
                     <div class="description">
@@ -239,7 +237,7 @@
                         ?></p>
                     </div>
                 </div>
-                <?php endforeach;?>
+                <?php endforeach?>
                 
             </div>
         </div>

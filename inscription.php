@@ -37,7 +37,7 @@
         }
         header('LOCATION:./connexion.php');
     }else{
-        echo "le mot de passe est diferent à celui de fonfirmation";
+        echo "le mot de passe est diferent à celui de confirmation";
     }
    
 
