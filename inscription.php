@@ -23,21 +23,22 @@
 
   //insertion des données dans la base de donnée
 
-
-    // if (strlen($password)<=5){
-    //      $messsage="mot de passe trop court";
-    //      return $messsage;
+    // if(strlen($password<=5)){
+    //     $messsage="Mot de passe trop court";
     // }
-
-    $result = "INSERT INTO users(firstname,lastname,image,sexe,email,password)";
-    $result .= "VALUES('$firstname','$lastname','$img_url','$sex','$email','$password')";
-
-    $query = mysqli_query($connexion,$result);
-
-    if($query){
-        echo "insertion valide ! ";
+    if($password==$cpassword){
+        $result = "INSERT INTO users(firstname,lastname,image,sexe,email,password)";
+        $result .= "VALUES('$firstname','$lastname','$img_url','$sex','$email','$password')";
+    
+        $query = mysqli_query($connexion,$result);
+    
+        if($query){
+            echo "insertion valide ! ";
+        }
+        header('LOCATION:./connexion.php');
+    }else{
+        echo "le mot de passe est diferent à celui de fonfirmation";
     }
-    header('LOCATION:./connexion.php');
    
 
     // if(strlen($password <=5)){
@@ -256,12 +257,7 @@
                 <div class="group">
                     <label for="password">Mot de passe</label>
                     <input type="password" name="password" id="password" placeholder="mot de passe"  >
-                    <?php
-                     if(!isset($messsage)){
-                        echo $messsage;
-                     }
-                    ?>
-                  
+                
                 </div>
                 <div class="group">
                     <label for="cpassword">Confirmer le mot de passe</label>

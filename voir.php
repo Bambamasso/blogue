@@ -17,13 +17,13 @@
         echo "OOps! Une erreur est survenue, veuillez réessayer plus tard!";
     } else{
         $article = mysqli_fetch_assoc($query);
-        var_dump($article);
+        // var_dump($article);
         $userid=$article['user_id'];
         $selecuser = "SELECT * FROM users WHERE id ='$userid' ";
         $query2 = mysqli_query($connexion, $selecuser);
 
         $user = mysqli_fetch_assoc($query2);
-        var_dump($user);
+        // var_dump($user);
     }
  }
  else{
@@ -233,7 +233,7 @@
                 </div>
                 <div class="details">
                     <p class="name"><?php echo $user['firstname'].' '. $user['lastname']; ?></p>
-                    <p class="date"><?php echo date( 'l d F Y', strtotime($articles["date"])); ?></p>
+                    <p class="date"><?php echo date( 'l d F Y', strtotime($article["date"])); ?></p>
                 </div>
             </div>
         </div>

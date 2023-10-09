@@ -15,16 +15,22 @@ $selection="SELECT * FROM users WHERE id='$sessionUserId'";
  if($recuperation){
     // var_dump($recuperation);
 
-     if(!empty($_POST['title']) && !empty($_POST['img_url']) && !empty($_POST['decription']) && !empty($_POST['categorie']) && !empty($_POST['content'])){
+     if(!empty($_POST['title']) && !empty($_POST['img_url']) && !empty($_POST['description']) && !empty($_POST['categorie']) && !empty($_POST['content'])){
 
      $title=$_POST['title'];
      $img_url=$_POST['img_url'];
-     $decription=$_POST['decription'];
+     $description=$_POST['description'];
      $categorie=$_POST['categorie'];
      $content=$_POST['content'];
     
-     $insertion="INSERT INTO Article (title,image,description,categorie,content,user_id)";
-     $insertion .= "VALUES('$title', '$img_url', '$decription', '$categorie', '$content', '') " ;
+     $insertion ="INSERT INTO Article (title,image,description,categorie,content,user_id)";
+     $insertion .= "VALUES('$title', '$img_url', '$description', '$categorie', '$content', '$sessionUserId') " ;
+
+      $requette=mysqli_query($connexion,$insertion);
+
+     if($requette){
+    echo"insertion validé";
+     }else{echo"echec";}
 
      }
     
@@ -32,7 +38,7 @@ $selection="SELECT * FROM users WHERE id='$sessionUserId'";
  }else{
     die("utilisateur inconnu");
  }
-}else{
+  }else{
     header('LOCATION:../../connexion.php');
 }
 
@@ -246,7 +252,7 @@ $selection="SELECT * FROM users WHERE id='$sessionUserId'";
     <main>
         <div id="content">
             <h3>Ajout d'un nouvel article</h3>
-            <form action="">
+            <form action="" method="post">
                 <div class="group">
                     <label for="title">Titre de l'article</label>
                     <input type="text" name="title" id="title" placeholder="">
@@ -257,11 +263,11 @@ $selection="SELECT * FROM users WHERE id='$sessionUserId'";
                 </div>
                 <div class="group">
                     <label for="decription">Description de l'article</label>
-                    <input type="text" name="decription" id="decription" placeholder="">
+                    <input type="text" name="description" id="decription" placeholder="">
                 </div>
                 <div class="group">
-                    <label for="category">Categorie de l'article</label>
-                    <select name="category" id="category">
+                    <label for="categorie">Categorie de l'article</label>
+                    <select name="categorie" id="categorie">
                         <option value="cuisine">Cuisine</option>
                         <option value="éducation">Éducation</option>
                         <option value="hygiène">Hygiène</option>
