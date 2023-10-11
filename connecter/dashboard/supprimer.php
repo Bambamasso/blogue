@@ -21,6 +21,18 @@ $selection="SELECT * FROM users WHERE id='$sessionUserId' ";
     header('LOCATION:../../connexion.php');
 }
 
+if($_GET['id']){
+    $id= $_GET['id'];
+    $rox = "DELETE  FROM article WHERE id='$id' ";
+    $execute = mysqli_query($connexion,$rox);
+    if($execute){
+        echo "suppression actualisé";
+        header('LOCATION:articles.php');
+    }else{
+        echo "erreur ";
+    }
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

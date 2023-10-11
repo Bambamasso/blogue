@@ -223,11 +223,9 @@
             <h3>Articles postés</h3>
             <div id="posted">
                 
-               <?php
-                    foreach($article as $articles):
-                ?>
+               <?php foreach($article as $articles):?>
                 <div class="article">
-                    <img src="<?php echo articles["image"];?>"
+                    <img src="<?php echo $articles["image"];?>"
                         alt="">
                     <a class="title" href="voir.php?id=<?php echo $articles["id"]?>"><?php echo $articles["title"];?></a>
                     <div class="description">
@@ -237,7 +235,7 @@
                         ?></p>
                     </div>
                 </div>
-                <?php endforeach?>
+                <?php endforeach;?>
                 
             </div>
         </div>

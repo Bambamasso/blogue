@@ -31,7 +31,7 @@ $selection="SELECT * FROM users WHERE id='$sessionUserId'";
      if($requette){
      echo"insertion validé";
      }
-    //  else{echo"echec";}
+     else{echo"echec";}
 
      }
     

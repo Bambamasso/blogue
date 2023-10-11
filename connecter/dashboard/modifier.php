@@ -17,9 +17,50 @@ $selection="SELECT * FROM users WHERE id='$sessionUserId' ";
  }else{
     die("utilisateur inconnu");
  }
+
 }else{
     header('LOCATION:../../connexion.php');
 }
+if(!empty($_GET['id'])){
+
+    $id=$_GET['id'];
+    $selection="SELECT * FROM Article WHERE id='$id' AND user_id='$sessionUserId'";
+    $requete=mysqli_query($connexion,$selection);
+
+    if($requete){
+        $article= mysqli_fetch_assoc($requete);
+        // var_dump($article);
+        if(!$article){
+           header('LOCATION:article.php') ;
+        }
+    }else{
+        die("oups une erreur c'est produit");
+    }
+
+    if(!empty($_POST['title']) && !empty($_POST['img_url']) && !empty($_POST['description']) && !empty($_POST['categorie']) && !empty($_POST['content'])){
+        $title=$_POST['title'];
+        $img_url=$_POST['img_url'];
+        $description=$_POST['description'];
+        $categorie=$_POST['categorie'];
+        $content=$_POST['content'];
+       
+        $insertion ="UPDATE Article SET title= '$title', image='$img_url',description= ' $description' , categorie='$categorie',content= '$content' WHERE id='$id' ";
+       
+         $requette=mysqli_query($connexion,$insertion);
+   
+        if($requette){
+            $selection="SELECT * FROM Article WHERE id='$id' AND user_id='$sessionUserId'";
+       $requete=mysqli_query($connexion,$selection);
+       $article= mysqli_fetch_assoc($requete);
+
+        echo"modification validé";
+        }
+      else{die( "echec");}
+   
+        }
+}
+ 
+
 
 ?>
 <!DOCTYPE html>
@@ -231,22 +272,22 @@ $selection="SELECT * FROM users WHERE id='$sessionUserId' ";
     <main>
         <div id="content">
             <h3>Modifier l'article</h3>
-            <form action="">
+            <form action="" method="post">
                 <div class="group">
                     <label for="title">Titre de l'article</label>
-                    <input type="text" name="" id="title" value="Ancien titre">
+                    <input type="text" name="title" id="title" value="<?php echo $article['title']?>">
                 </div>
                 <div class="group">
                     <label for="img_url">Image(lien url) de l'article</label>
-                    <input type="text" name="" id="img_url" value="https://media.istockphoto.com/id/1319623001/photo/caesar-salad-with-crispy-bread-and-bacon-healthy-food-style.webp?s=1024x1024&w=is&k=20&c=gvTJfggHVKAWWCTdcEHIziVAfQmZJfgibmokDtLdiCc=">
+                    <input type="text" name="img_url" id="img_url" value="<?php echo $article['image']?>">
                 </div>
                 <div class="group">
                     <label for="decription">Description de l'article</label>
-                    <input type="text" name="" id="decription" value="Ancienne description">
+                    <input type="text" name="description" id="decription" value="<?php echo $article['description']?>">
                 </div>
                 <div class="group">
                     <label for="category">Categorie de l'article</label>
-                    <select name="category" id="category">
+                    <select name="categorie" id="category">
                         <option value="cuisine">Cuisine</option>
                         <option value="éducation">Éducation</option>
                         <option value="hygiène">Hygiène</option>
@@ -254,7 +295,7 @@ $selection="SELECT * FROM users WHERE id='$sessionUserId' ";
                 </div>
                 <div class="group">
                     <label for="wcontent">Contenu de l'article</label>
-                    <textarea name="content" id="wcontent">Contenu à modifier</textarea>
+                    <textarea name="content" id="wcontent"> <?php echo $article['content'];?></textarea>
                 </div>
                 <input type="submit" value="Modifier l'article">
             </form>
