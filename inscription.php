@@ -1,49 +1,65 @@
 <?php
+//vérification des champs
+function escape($valeur){
+    return trim(strip_tags($valeur));
+}
 
   //on verifie si les champs ne sont pas vides
-
   if(!empty($_POST['firstname'])  && !empty($_POST['lastname']) && !empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['sex']) && !empty($_POST['cpassword'])){
 
     //recuperation des données dans les variable
+   $firstname =escape($_POST['firstname']);
+   $lastname =escape($_POST['lastname']);
+   $email =escape($_POST['email']);
+   $img_url =escape($_POST['img_url']);
+   $sex = escape($_POST['sex']);
+   $password =escape($_POST['password']);
+   $cpassword =escape($_POST['cpassword']);
 
-   $firstname =$_POST['firstname'];
-   $lastname =$_POST['lastname'];
-   $email =$_POST['email'];
-   $img_url =$_POST['img_url'];
-   $sex = $_POST['sex'];
-   $password =$_POST['password'];
-   $cpassword =$_POST['cpassword'];
+   if(empty($firstname) or strlen($firstname)<2){
+    $err_firstame="Erreur sur le firtsname";
+   }
 
- //connexion à la base de donnée
+   if(empty($lastname) or strlen( $lastname)<2){
+    $err_lastname="Erreur sur le lastname";
+   }
 
-   $connexion = mysqli_connect('localhost', 'root','', 'blogue' );
+   if(empty($email) or strlen($email)<2){
+    $err_email="Erreur sur le email";
+   }
+
+   if(empty($password) or strlen($password)<2){
+    $err_password="Erreur sur le password";
+   }
+
+   if(empty($cpassword) ){
+    $err_cpassword="Erreur sur le cpassword";
+   }elseif($cpassword !=$password){
+    $err_cpassword="Le mot de passe de confirmation est différent";
+   }
+
+  //connexion à la base de donnée
+  if(!isset($err_firstame) && !isset($err_lastname)&& !isset($err_email)&& !isset($err_password) && !isset($err_cpassword)){
+
+    $connexion = mysqli_connect('localhost', 'root','', 'blogue' );
    if(!$connexion){
-//    die('Erreur de connexion à la Base de Donnée');
+    die('Erreur de connexion à la Base de Donnée');
    }
 
   //insertion des données dans la base de donnée
-
-    // if(strlen($password<=5)){
-    //     $messsage="Mot de passe trop court";
-    // }
-    if($password==$cpassword){
+   
         $result = "INSERT INTO users(firstname,lastname,image,sexe,email,password)";
         $result .= "VALUES('$firstname','$lastname','$img_url','$sex','$email','$password')";
     
         $query = mysqli_query($connexion,$result);
     
         if($query){
-            echo "insertion valide ! ";
+            echo "insertion valide !";
         }
         header('LOCATION:./connexion.php');
-    }else{
-        echo "le mot de passe est diferent à celui de confirmation";
-    }
+    
+  }
    
-
-    // if(strlen($password <=5)){
-    //  $messsage="votre mot de passe est trop court";
-    //  }
   }
 
 ?>
@@ -236,10 +252,16 @@
                 <div class="group">
                     <label for="firstname">Nom</label>
                     <input type="text" name="firstname" id="firstname" placeholder="John">
+                    <?php if(!empty($err_firstame)){
+                        echo $err_firstame;
+                    }?>
                 </div>
                 <div class="group">
                     <label for="lastname">Prénoms</label>
                     <input type="text" name="lastname" id="lastname" placeholder="Doe Smith">
+                    <?php if(!empty($err_lastname)){
+                        echo $err_lastname;
+                    }?>
                 </div>
                 <div class="group">
                     <label for="img_url">Lien de la photo</label>
@@ -252,16 +274,24 @@
                 </div>
                 <div class="group">
                     <label for="email">Email</label>
-                    <input type="text" name="email" id="email" placeholder="johnDoe@ex.ci">
+                    <input type="email" name="email" id="email" placeholder="johnDoe@ex.ci">
+                    <?php if(!empty($err_email)){
+                        echo $err_email;
+                    }?>
                 </div>
                 <div class="group">
                     <label for="password">Mot de passe</label>
                     <input type="password" name="password" id="password" placeholder="mot de passe"  >
-                
+                    <?php if(!empty($err_password)){
+                        echo $err_password;
+                    }?>
                 </div>
                 <div class="group">
                     <label for="cpassword">Confirmer le mot de passe</label>
                     <input type="password" name="cpassword" id="cpassword" placeholder="confirmation du mot de passe">
+                    <?php if(!empty($err_cpassword)){
+                        echo $err_cpassword;
+                    }?>
                 </div>
                 <input type="submit" value="S'inscrire" name="" >
             </form>
